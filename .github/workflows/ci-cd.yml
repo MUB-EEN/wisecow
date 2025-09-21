@@ -19,16 +19,16 @@ jobs:
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
       with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+        username: ${{ secrets.MUBEEN07 }}        # Your Docker Hub username secret
+        password: ${{ secrets.DOCKER_PASSWORD }} # Your Docker Hub PAT secret
 
     - name: Build Docker image
       run: |
-        docker build -t ${{ secrets.DOCKER_USERNAME }}/wisecow-app:latest .
+        docker build -t ${{ secrets.MUBEEN07 }}/wisecow-app:latest .
 
     - name: Push Docker image
       run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/wisecow-app:latest
+        docker push ${{ secrets.MUBEEN07 }}/wisecow-app:latest
 
     - name: Set up kubectl
       uses: azure/setup-kubectl@v3
@@ -40,3 +40,4 @@ jobs:
         kubectl apply -f wisecow-deployment.yaml
         kubectl apply -f wisecow-service.yaml
         kubectl apply -f wisecow-ingress.yaml
+
