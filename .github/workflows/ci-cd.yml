@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI/CD Pipeline
 
 on:
   push:
@@ -35,11 +35,13 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/wisecow-app:latest
 
-      # Step 6: Set up Kubectl (correct version format)
-      - name: Set up Kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: '1.30.0'
+      # Step 6: Install latest kubectl manually
+      - name: Install kubectl
+        run: |
+          curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+          chmod +x kubectl
+          sudo mv kubectl /usr/local/bin/
+          kubectl version --client
 
       # Step 7: Configure Kubeconfig from GitHub Secret
       - name: Set up Kubeconfig
