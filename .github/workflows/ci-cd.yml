@@ -35,11 +35,11 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/wisecow-app:latest
 
-      # Step 6: Install Kubectl (match your cluster version!)
+      # Step 6: Set up Kubectl (correct version format)
       - name: Set up Kubectl
         uses: azure/setup-kubectl@v3
         with:
-          version: '1.30.0'   # <- change this to your cluster version if different
+          version: '1.30.0'
 
       # Step 7: Configure Kubeconfig from GitHub Secret
       - name: Set up Kubeconfig

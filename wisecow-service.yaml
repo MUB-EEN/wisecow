@@ -3,12 +3,11 @@ kind: Service
 metadata:
   name: wisecow-service
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: wisecow
   ports:
     - protocol: TCP
-      port: 80          # Service port
-      targetPort: 4499  # Pod container port
-      nodePort: 30080   # Optional NodePort
+      port: 80        # service port (what Ingress uses)
+      targetPort: 4499  # FIXED: match container port
 
